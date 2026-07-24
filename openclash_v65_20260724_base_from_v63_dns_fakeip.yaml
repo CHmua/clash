@@ -1,0 +1,192 @@
+# OpenClash / Mihomo 基础配置
+# 版本：v65_20260724_base_from_v63_dns_fakeip
+# 日期：2026-07-24
+# 基准：clash_worker_v63_lowercase_clash_meta.txt
+# 用途：供同仓库的 openclash_v65_20260724_subconverter_from_v63_rules_fix.ini 引用
+
+mixed-port: 7890
+allow-lan: true
+bind-address: "*"
+mode: rule
+log-level: info
+ipv6: false
+tcp-concurrent: true
+unified-delay: true
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+dns:
+  enable: true
+  listen: 0.0.0.0:7874
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    # 局域网与本地域名
+    - "*.lan"
+    - "*.localdomain"
+    - "*.example"
+    - "*.invalid"
+    - "*.localhost"
+    - "*.test"
+    - "*.local"
+    - "*.home.arpa"
+    - "*.direct"
+    - "cable.auth.com"
+    - "network-test.debian.org"
+    - "detectportal.firefox.com"
+    - "resolver1.opendns.com"
+    - "localhost.*.weixin.qq.com"
+
+    # NTP
+    - "time.*.com"
+    - "time.*.gov"
+    - "time.*.edu.cn"
+    - "time.*.apple.com"
+    - "time-ios.apple.com"
+    - "time1.*.com"
+    - "time2.*.com"
+    - "time3.*.com"
+    - "time4.*.com"
+    - "time5.*.com"
+    - "time6.*.com"
+    - "time7.*.com"
+    - "ntp.*.com"
+    - "ntp1.*.com"
+    - "ntp2.*.com"
+    - "ntp3.*.com"
+    - "ntp4.*.com"
+    - "ntp5.*.com"
+    - "ntp6.*.com"
+    - "ntp7.*.com"
+    - "*.time.edu.cn"
+    - "*.ntp.org.cn"
+    - "+.pool.ntp.org"
+    - "time1.cloud.tencent.com"
+
+    # 国内音乐
+    - "music.163.com"
+    - "*.music.163.com"
+    - "*.126.net"
+    - "musicapi.taihe.com"
+    - "music.taihe.com"
+    - "songsearch.kugou.com"
+    - "trackercdn.kugou.com"
+    - "*.kuwo.cn"
+    - "api-jooxtt.sanook.com"
+    - "api.joox.com"
+    - "joox.com"
+    - "y.qq.com"
+    - "*.y.qq.com"
+    - "streamoc.music.tc.qq.com"
+    - "mobileoc.music.tc.qq.com"
+    - "isure.stream.qqmusic.qq.com"
+    - "dl.stream.qqmusic.qq.com"
+    - "aqqmusic.tc.qq.com"
+    - "amobile.music.tc.qq.com"
+    - "*.music.migu.cn"
+    - "music.migu.cn"
+
+    # Windows、QQ 与路由器检测
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "localhost.ptlogin2.qq.com"
+    - "localhost.sec.qq.com"
+    - "+.qq.com"
+    - "+.tencent.com"
+    - "heartbeat.belkin.com"
+    - "*.linksys.com"
+    - "*.linksyssmartwifi.com"
+    - "*.router.asus.com"
+
+    # 游戏、主机与 STUN
+    - "+.srv.nintendo.net"
+    - "*.n.n.srv.nintendo.net"
+    - "+.cdn.nintendo.net"
+    - "+.stun.playstation.net"
+    - "xbox.*.*.microsoft.com"
+    - "*.*.xboxlive.com"
+    - "xbox.*.microsoft.com"
+    - "xnotify.xboxlive.com"
+    - "+.battle.net"
+    - "+.battlenet.com.cn"
+    - "+.wargaming.net"
+    - "stun.*.*"
+    - "stun.*.*.*"
+    - "+.stun.*.*"
+    - "+.stun.*.*.*"
+    - "+.stun.*.*.*.*"
+    - "+.stun.*.*.*.*.*"
+
+    # Apple 更新
+    - "mesu.apple.com"
+    - "swscan.apple.com"
+    - "swquery.apple.com"
+    - "swdownload.apple.com"
+    - "swcdn.apple.com"
+    - "swdist.apple.com"
+
+    # Google、Netflix 与流媒体
+    - "lens.l.google.com"
+    - "stun.l.google.com"
+    - "na.b.g-tun.com"
+    - "+.nflxvideo.net"
+    - "+.media.dssott.com"
+
+    # 其他兼容项
+    - "proxy.golang.org"
+    - "*.mcdn.bilivideo.cn"
+    - "local.adguard.org"
+    - "+.sandai.net"
+    - "+.n0808.com"
+    - "+.uu.163.com"
+    - "ps.res.netease.com"
+    - "+.pub.3gppnetwork.org"
+
+    # Google / Google Play 补充
+    - "+.services.googleapis.cn"
+    - "+.xn--ngstr-lra8j.com"
+    - "+.googleapis.com"
+    - "+.googleapis.cn"
+    - "+.googleusercontent.com"
+    - "+.gvt1.com"
+    - "+.gvt2.com"
+    - "+.gvt3.com"
+    - "+.ggpht.com"
+
+    # Apple / App Store 补充
+    - "+.apple.com"
+    - "+.apple.com.cn"
+
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+
+  # 解析代理服务器本身的域名，保留 v63 针对 Mac/第三方机场域名解析的修复。
+  proxy-server-nameserver:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+    - tls://1.1.1.1:853
+    - tls://8.8.8.8:853
+    - 223.5.5.5
+    - 119.29.29.29
+
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+
+  fallback:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+
+proxies: []
+proxy-groups: []
+rules: []
